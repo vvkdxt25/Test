@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field & Form — Everyday objects, considered</title>
+  <meta name="description" content="A considered collection of objects for living well.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17231f;
+      --muted: #68746d;
+      --paper: #f7f6f1;
+      --line: #dce1d8;
+      --lime: #d7ed73;
+      --olive: #8d9b52;
+      --mist: #e8eee6;
+      --white: #fffefb;
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    button { border: 0; color: inherit; cursor: pointer; font: inherit; }
+    img { display: block; width: 100%; }
+
+    .announcement { align-items: center; background: var(--ink); color: #eaf1df; display: flex; font-family: var(--mono); font-size: 10px; justify-content: center; letter-spacing: .1em; min-height: 34px; padding: 8px 16px; text-transform: uppercase; }
+    .announcement span { color: var(--lime); margin-left: 10px; }
+    header { align-items: center; display: flex; justify-content: space-between; max-width: 1320px; margin: auto; padding: 27px 32px 25px; }
+    .logo { font-size: 16px; font-weight: 800; letter-spacing: -.04em; }
+    .logo em { color: var(--olive); font-style: normal; }
+    nav { display: flex; gap: 30px; margin-left: 80px; }
+    nav a { color: var(--muted); font-size: 12px; font-weight: 700; text-decoration: none; }
+    nav a:first-child, nav a:hover { color: var(--ink); }
+    .header-actions { align-items: center; display: flex; gap: 20px; }
+    .header-actions button { background: none; font-size: 12px; font-weight: 700; padding: 4px 0; }
+    .cart-button { align-items: center; display: flex; gap: 8px; }
+    .cart-count { align-items: center; background: var(--lime); border-radius: 50%; display: inline-flex; font-family: var(--mono); font-size: 10px; height: 20px; justify-content: center; width: 20px; }
+
+    .hero { background: var(--mist); display: grid; grid-template-columns: minmax(300px, .92fr) 1.08fr; min-height: 520px; overflow: hidden; }
+    .hero-copy { align-self: center; max-width: 530px; padding: 64px clamp(32px, 7vw, 110px); }
+    .eyebrow { color: var(--olive); font-family: var(--mono); font-size: 10px; letter-spacing: .13em; margin-bottom: 25px; text-transform: uppercase; }
+    h1 { font-size: clamp(46px, 5vw, 79px); letter-spacing: -.075em; line-height: .96; margin: 0 0 26px; max-width: 470px; }
+    .hero-copy p { color: #5e6c63; font-size: 15px; line-height: 1.7; margin: 0 0 31px; max-width: 370px; }
+    .cta { align-items: center; background: var(--ink); color: var(--white); display: inline-flex; font-size: 11px; font-weight: 800; gap: 30px; padding: 15px 18px; text-decoration: none; }
+    .cta:hover { background: var(--olive); }
+    .hero-image { min-height: 520px; overflow: hidden; position: relative; }
+    .hero-image img { height: 100%; object-fit: cover; object-position: center; }
+    .hero-tag { background: var(--lime); bottom: 25px; font-family: var(--mono); font-size: 10px; left: 25px; padding: 10px 12px; position: absolute; text-transform: uppercase; }
+
+    main { max-width: 1320px; margin: auto; padding: 77px 32px 100px; }
+    .section-heading { align-items: flex-end; display: flex; justify-content: space-between; margin-bottom: 28px; }
+    .section-heading h2 { font-size: 27px; letter-spacing: -.055em; margin: 0; }
+    .section-heading p { color: var(--muted); font-family: var(--mono); font-size: 10px; margin: 0 0 4px; text-transform: uppercase; }
+    .products { display: grid; gap: 17px; grid-template-columns: repeat(4, 1fr); }
+    .product { min-width: 0; }
+    .product-image { background: #e2e6dd; margin-bottom: 16px; overflow: hidden; position: relative; }
+    .product-image img { aspect-ratio: .94; object-fit: cover; transition: transform .45s ease; }
+    .product:hover img { transform: scale(1.035); }
+    .badge { background: var(--white); font-family: var(--mono); font-size: 9px; left: 11px; padding: 7px 9px; position: absolute; top: 11px; }
+    .product-info { align-items: flex-start; display: flex; justify-content: space-between; }
+    .product h3 { font-size: 13px; letter-spacing: -.02em; margin: 0 0 6px; }
+    .product p { color: var(--muted); font-family: var(--mono); font-size: 10px; margin: 0; }
+    .price { font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+    .add-button { background: none; color: var(--olive); display: block; font-family: var(--mono); font-size: 10px; margin-top: 13px; padding: 0; text-transform: uppercase; }
+    .add-button:hover { color: var(--ink); }
+
+    .story { align-items: center; background: var(--ink); color: var(--white); display: grid; grid-template-columns: .9fr 1.1fr; margin-top: 110px; min-height: 360px; }
+    .story-copy { padding: 55px clamp(30px, 7vw, 100px); }
+    .story-copy .eyebrow { color: var(--lime); }
+    .story h2 { font-size: clamp(28px, 3vw, 43px); letter-spacing: -.06em; line-height: 1.02; margin: 0 0 20px; max-width: 360px; }
+    .story p { color: #b5c2b4; font-size: 13px; line-height: 1.7; margin: 0; max-width: 330px; }
+    .story-image { height: 100%; min-height: 360px; }
+    .story-image img { height: 100%; object-fit: cover; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-family: var(--mono); font-size: 10px; justify-content: space-between; max-width: 1320px; margin: auto; padding: 22px 32px 36px; text-transform: uppercase; }
+
+    .cart-drawer { background: var(--white); box-shadow: -8px 0 30px rgba(23,35,31,.12); height: 100%; max-width: 390px; padding: 28px; position: fixed; right: 0; top: 0; transform: translateX(105%); transition: transform .3s ease; width: 90%; z-index: 3; }
+    .cart-drawer.open { transform: translateX(0); }
+    .drawer-top { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding-bottom: 20px; }
+    .drawer-top h2 { font-size: 20px; letter-spacing: -.05em; margin: 0; }
+    .close { background: none; font-size: 24px; line-height: 1; }
+    .cart-items { color: var(--muted); font-family: var(--mono); font-size: 11px; padding: 30px 0; }
+    .cart-row { align-items: center; border-bottom: 1px solid var(--line); color: var(--ink); display: flex; justify-content: space-between; padding: 14px 0; }
+    .cart-row span:last-child { color: var(--muted); }
+    .cart-total { border-top: 1px solid var(--ink); display: flex; font-family: var(--mono); font-size: 12px; justify-content: space-between; padding-top: 17px; }
+    .drawer-checkout { background: var(--lime); font-size: 11px; font-weight: 800; margin-top: 25px; padding: 16px; width: 100%; }
+    .drawer-checkout:hover { background: var(--olive); color: var(--white); }
+
+    @media (max-width: 760px) {
+      header { padding: 22px 20px; }
+      nav { display: none; }
+      .header-actions { gap: 13px; }
+      .header-actions button:first-child { display: none; }
+      .hero { display: flex; flex-direction: column-reverse; }
+      .hero-image, .hero-image img { min-height: 330px; }
+      .hero-copy { padding: 45px 22px 56px; }
+      h1 { font-size: 52px; }
+      main { padding: 58px 20px 70px; }
+      .section-heading p { display: none; }
+      .products { gap: 34px 12px; grid-template-columns: repeat(2, 1fr); }
+      .product-image { margin-bottom: 12px; }
+      .story { display: flex; flex-direction: column; margin-top: 72px; }
+      .story-copy { padding: 44px 27px; width: 100%; }
+      .story-image { min-height: 275px; width: 100%; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">Complimentary shipping on orders over $100 <span>New season / 2024</span></div>
+  <header>
+    <a class="logo" href="#top" aria-label="Field and Form home">field <em>&</em> form</a>
+    <nav aria-label="Main navigation">
+      <a href="#shop">Shop all</a><a href="#shop">Objects</a><a href="#shop">Textiles</a><a href="#story">Our approach</a>
+    </nav>
+    <div class="header-actions"><button type="button" aria-label="Search">Search</button><button class="cart-button" type="button" aria-label="Open shopping bag">Bag <span class="cart-count">0</span></button></div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-copy"><div class="eyebrow">The autumn edit / 01</div><h1>Objects with a sense of place.</h1><p>Thoughtful pieces for daily rituals. Made slowly, chosen carefully, and designed to stay with you.</p><a class="cta" href="#shop">Explore the collection <span>↘</span></a></div>
+    <div class="hero-image"><img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=1400&q=85" alt="Sunlit modern home interior with a wooden chair"><div class="hero-tag">Living, intentionally</div></div>
+  </section>
+
+  <main>
+    <section id="shop"><div class="section-heading"><h2>New arrivals</h2><p>04 considered objects</p></div><div class="products">
+      <article class="product" data-name="Oiled oak stool" data-price="168"><div class="product-image"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=700&q=85" alt="Cream lounge chair in a bright room"><span class="badge">New</span></div><div class="product-info"><div><h3>Oiled oak stool</h3><p>Solid oak / Denmark</p></div><span class="price">$168</span></div><button class="add-button" type="button">+ Add to bag</button></article>
+      <article class="product" data-name="Hand-thrown pitcher" data-price="84"><div class="product-image"><img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=700&q=85" alt="Handmade ceramic pottery in neutral tones"><span class="badge">Bestseller</span></div><div class="product-info"><div><h3>Hand-thrown pitcher</h3><p>Stoneware / Portugal</p></div><span class="price">$84</span></div><button class="add-button" type="button">+ Add to bag</button></article>
+      <article class="product" data-name="Linen throw" data-price="120"><div class="product-image"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=700&q=85" alt="Warm textured linen chair and table"><span class="badge">New</span></div><div class="product-info"><div><h3>Washed linen throw</h3><p>European linen / oat</p></div><span class="price">$120</span></div><button class="add-button" type="button">+ Add to bag</button></article>
+      <article class="product" data-name="Brass table lamp" data-price="210"><div class="product-image"><img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=85" alt="Minimal brass table lamp on a desk"><span class="badge">Limited</span></div><div class="product-info"><div><h3>Brass table lamp</h3><p>Brushed brass / Italy</p></div><span class="price">$210</span></div><button class="add-button" type="button">+ Add to bag</button></article>
+    </div></section>
+    <section class="story" id="story"><div class="story-copy"><div class="eyebrow">Material matters</div><h2>Good design grows quieter with time.</h2><p>We work with makers who care about process as much as the finished piece. Every object earns its place through honest materials and useful beauty.</p></div><div class="story-image"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1100&q=85" alt="Calm living room with natural materials"></div></section>
+  </main>
+  <footer><span>Field & Form © 2024</span><span>Designed for everyday living</span></footer>
+
+  <aside class="cart-drawer" aria-label="Shopping bag" aria-hidden="true"><div class="drawer-top"><h2>Your bag</h2><button class="close" type="button" aria-label="Close shopping bag">×</button></div><div class="cart-items"><p class="empty-message">Your bag is currently empty.</p></div><div class="cart-total"><span>Total</span><span class="total-value">$0</span></div><button class="drawer-checkout" type="button">Continue to checkout</button></aside>
+  <script>
+    const bag = [];
+    const drawer = document.querySelector('.cart-drawer');
+    const count = document.querySelector('.cart-count');
+    const items = document.querySelector('.cart-items');
+    const total = document.querySelector('.total-value');
+
+    function renderBag() {
+      count.textContent = bag.length;
+      if (!bag.length) {
+        items.innerHTML = '<p class="empty-message">Your bag is currently empty.</p>';
+      } else {
+        items.innerHTML = bag.map((item) => `<div class="cart-row"><span>${item.name}</span><span>$${item.price}</span></div>`).join('');
+      }
+      total.textContent = `$${bag.reduce((sum, item) => sum + Number(item.price), 0)}`;
+    }
+
+    document.querySelectorAll('.add-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const product = button.closest('.product');
+        bag.push({ name: product.dataset.name, price: product.dataset.price });
+        renderBag();
+        drawer.classList.add('open');
+        drawer.setAttribute('aria-hidden', 'false');
+      });
+    });
+    document.querySelector('.cart-button').addEventListener('click', () => { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); });
+    document.querySelector('.close').addEventListener('click', () => { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); });
+  </script>
+</body>
+</html>
